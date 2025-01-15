@@ -8,7 +8,9 @@ export const passportCall = (strategy) => {
                 error: info.messages ? info.messages : info.toString()
             });
             req.user = user;
+            
             next();
         })(req, res, next);
+        const user_session = req.user;
     }
 }

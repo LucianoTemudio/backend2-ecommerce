@@ -18,6 +18,7 @@ class UserService extends Services {
       email: user.email,
       age: user.age,
       role: user.role,
+      cart_id: user.cart,
     };
 
     return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "20m" });
@@ -58,6 +59,8 @@ class UserService extends Services {
       if (!userExist) throw new Error("User not found");
       const passValid = isValidPassword(password, userExist);
       if (!passValid) throw new Error("incorrect credentials");
+      //const response = this.generateToken(userExist);
+      //return new UserResDTO(response);
       return this.generateToken(userExist);
     } catch (error) {
       throw error;

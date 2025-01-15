@@ -2,10 +2,14 @@ import express from "express";
 import session from 'express-session'
 import cookieParser from "cookie-parser";
 import usersRouter from "./routes/users.router.js";
+import ticketsRouter from "./routes/tickets.router.js";
+import productsRouter from "./routes/products.router.js"
+import cartsRouter from "./routes/carts.router.js"
 import { initMongoDB } from "./db/connection.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
+import emailRouter from './routes/email.router.js';
 
 import 'dotenv/config';
 import './passport/jwt.js';
@@ -34,6 +38,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/users", usersRouter);
+app.use("/tickets", ticketsRouter);
+app.use("/products", productsRouter);
+app.use("/carts", cartsRouter);
+
+app.use('/api', emailRouter);
 
 app.use(errorHandler);
 

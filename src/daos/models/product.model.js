@@ -1,18 +1,12 @@
-import { Schema, model } from "mongoose"; 
-import mongoosePaginator from "mongoose-paginate-v2";
+import { Schema, model } from "mongoose";
 
 const collection = "products";
 const schema = new Schema({
-    title: { type: String, required: true },
-    photo: {
-        type: String,
-        default: "../../../../public/assets/product.jpg"
-    },
+    name: { type: String, required: true },
+    description: { type: String, required: true},
     category: { type: String, required: true },
-    price: { type: Number, default: 1 },
-    stock: { type: Number, required: true }
+    price: { type: Number, required: true },
+    stock: { type: Number, required: false }
 });
 
-schema.plugin(mongoosePaginator)
-const Product = model(collection, schema);
-export default Product;
+export const ProductModel = model(collection, schema);
